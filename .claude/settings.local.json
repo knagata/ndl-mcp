@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:dl.ndl.go.jp)",
+      "WebFetch(domain:iss.ndl.go.jp)",
+      "WebFetch(domain:ndlsearch.ndl.go.jp)",
+      "WebFetch(domain:lab.ndl.go.jp)",
+      "Bash(pip install *)",
+      "Bash(pip3 install *)",
+      "Bash(python server.py)",
+      "Bash(python3 server.py)"
+    ]
+  }
+}
