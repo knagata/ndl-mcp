@@ -603,6 +603,12 @@ async def ndl_book_page_search(
     async with httpx.AsyncClient(timeout=TIMEOUT) as client:
         resp = await client.get(PAGE_URL, params=params, headers=headers)
 
+        if resp.status_code == 403:
+            raise ValueError(
+                f"PID「{pid}」の資料へのアクセスが拒否されました（403 Forbidden）。\n"
+                "個人送信・図書館送信限定資料、著作権保護資料、IP制限等によりアクセスできない可能性があります。\n"
+                f"資料ページ: https://dl.ndl.go.jp/pid/{pid}"
+            )
         if resp.status_code == 404:
             raise ValueError(
                 f"PID「{pid}」の資料が見つかりません。"
@@ -719,6 +725,10 @@ async def ndl_get_fulltext(
 
     注意: 大きな資料は数百ページになることがあります。
           page_from / page_to で範囲を絞ることを推奨します。
+
+    注意: アクセス制限のある資料（個人送信・図書館送信限定、著作権保護等）は
+          取得できません（403 Forbidden）。ndl_fulltext_search でヒットしない
+          資料もこれらの制限に該当している場合があります。
     """
     headers = {"User-Agent": USER_AGENT}
     url = FULLTEXT_URL.format(pid=pid)
@@ -726,6 +736,12 @@ async def ndl_get_fulltext(
     async with httpx.AsyncClient(timeout=TIMEOUT) as client:
         resp = await client.get(url, headers=headers)
 
+        if resp.status_code == 403:
+            raise ValueError(
+                f"PID「{pid}」の資料へのアクセスが拒否されました（403 Forbidden）。\n"
+                "個人送信・図書館送信限定資料、著作権保護資料、IP制限等によりアクセスできない可能性があります。\n"
+                f"資料ページ: https://dl.ndl.go.jp/pid/{pid}"
+            )
         if resp.status_code == 404:
             raise ValueError(
                 f"PID「{pid}」の資料が見つかりません。"
