@@ -3,11 +3,13 @@
 NDL MCP Server — 国立国会図書館APIへのMCPアクセス
 
 提供ツール:
-  - ndl_search            : OpenSearchベースのキーワード・フィールド指定検索
-  - ndl_search_cql        : CQLクエリによる高度な検索（SRUベース）
-  - ndl_fulltext_search   : デジタルコレクションの全文検索
-  - ndl_book_page_search  : 特定資料内でのページ単位全文検索
-  - ndl_get_thumbnail_url : ISBNから書影URLを取得
+  - ndl_search               : OpenSearchベースのキーワード・フィールド指定検索
+  - ndl_search_cql           : CQLクエリによる高度な検索（SRUベース）
+  - ndl_fulltext_search      : デジタルコレクションの全文検索
+  - ndl_book_page_search     : 特定資料内でのページ単位全文検索
+  - ndl_get_thumbnail_url    : ISBNから書影URLを取得
+  - ndl_get_fulltext         : デジタル資料の全文テキスト取得
+  - ndl_search_illustrations : デジタル資料の図版検索
 """
 
 import logging
